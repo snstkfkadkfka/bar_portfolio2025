@@ -118,10 +118,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"src/js/main.js":[function(require,module,exports) {
-// import _ from 'lodash';
-
-// console.log(_.camelCase('Hello Enviroment Web!!'));
-
 /* page2 gsap scrollTrigger */
 {
   gsap.registerPlugin(ScrollTrigger);
@@ -344,7 +340,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 {
   var clickBnt = document.querySelector('.page7__click p');
   var morImg = document.querySelector('.page7__inner');
-  console.log(clickBnt, morImg);
   clickBnt.addEventListener("click", function () {
     morImg.classList.toggle("active");
   });
@@ -435,7 +430,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51272" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51471" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
