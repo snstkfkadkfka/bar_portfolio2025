@@ -1,0 +1,30 @@
+{
+  "name": "portfolio_baeahram",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/plugin-transform-runtime": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "autoprefixer": "^10.4.21",
+    "image-map-resizer": "^1.0.10",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "postcss": "^8.5.4",
+    "sass": "^1.89.1",
+    "sass-loader": "^16.0.5"
+  },
+  "dependencies": {
+    "d": "^1.0.2",
+    "sec": "^2.0.0",
+    "src": "^1.1.2"
+  },
+  "description": ""
+}
