@@ -455,7 +455,7 @@ var routes = {
     year: '2025년',
     title: '올영 런칭 이벤트',
     subtitle: '앱 배너',
-    keywords: ["#포토삽", "#화장품", "#런칭", "#봄맞이", "#벗꽃", "#자연", "천연"],
+    keywords: ["#포토삽", "#화장품", "#런칭", "#봄맞이", "#벗꽃", "#자연", "#천연"],
     img: _graphic10.default,
     maphref: ""
   }
@@ -526,7 +526,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52177" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54145" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

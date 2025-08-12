@@ -117,62 +117,295 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
+})({"src/js/index.js":[function(require,module,exports) {
+/* page2 gsap scrollTrigger */
+{
+  gsap.registerPlugin(ScrollTrigger);
+  function createAnimation(_ref) {
+    var x1 = _ref.x1,
+      y1 = _ref.y1,
+      x2 = _ref.x2,
+      y2 = _ref.y2,
+      endValue = _ref.endValue;
+    var tl = gsap.timeline();
+    tl.from(".page2__inner .page2__bg .rebon1", {
+      x: x1,
+      y: y1
+    }, "rebon").from(".page2__inner .page2__bg .rebon2", {
+      x: x2,
+      y: y2
+    }, "rebon").from(".page2__inner .page2__text", {
+      opacity: 0,
+      scale: 0.9
+    }, "rebon").to(".page2__inner .page2__text", {
+      opacity: 1,
+      scale: 1
+    });
+    ScrollTrigger.create({
+      animation: tl,
+      trigger: ".page2__inner",
+      start: "top top",
+      end: "+=".concat(endValue),
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      markers: false
+    });
   }
-  return bundleURL;
-}
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
+  ScrollTrigger.matchMedia({
+    // Desktop
+    "(min-width: 1200px)": function minWidth_1200px() {
+      createAnimation({
+        x1: "-2000px",
+        y1: "300px",
+        x2: "2000px",
+        y2: "-100px",
+        endValue: 2000
+      });
+    },
+    // Tablet
+    "(min-width: 700px) and (max-width: 1199px)": function minWidth_700px_and_MaxWidth_1199px() {
+      createAnimation({
+        x1: "-1400px",
+        y1: "100px",
+        x2: "1400px",
+        y2: "-100px",
+        endValue: 2000
+      });
+    },
+    // Mobile
+    "(max-width: 699px)": function maxWidth_699px() {
+      createAnimation({
+        x1: "-900px",
+        y1: "100px",
+        x2: "900px",
+        y2: "-100px",
+        endValue: 900
+      });
     }
-  }
-  return '/';
+  });
 }
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+
+/* page3 skill tep */
+{
+  var skillBut = document.querySelector('.page3__side__skill .button');
+  var skillBox = document.querySelector('.page3__side__skill');
+  skillBut.addEventListener("click", function () {
+    skillBox.classList.toggle('active');
+  });
 }
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
+
+/* page4 gsap scrollTrigger */
+{
+  var ani2 = gsap.timeline();
+  ani2.to("#page4 .page4__img .img1 div", {
+    top: '0px'
+  }, "img").to("#page4 .page4__img .img2 div", {
+    top: '0px'
+  }, "img").to("#page4 .page4__img .img3 div", {
+    top: '-50px'
+  }, "img").to("#page4 .page4__img .img4 div", {
+    top: '-150px'
+  }, "img").from("#page4 .page4__text .txt1", {
+    left: '-80%'
+  }, "img").from("#page4 .page4__text .txt2", {
+    left: '-80%'
+  }, "img").from("#page4 .page4__text .txt3", {
+    left: '-60%'
+  }, "img").from("#page4 .page4__text .txt4", {
+    right: '-100%'
+  }, "img").from("#page4 .page4__text .txt5", {
+    right: '-100%'
+  }, "img").from("#page4 .page4__text .txt6", {
+    right: '-150%'
+  }, "img").from("#page4", {
+    backgroundColor: '#f3f6ff'
+  }, "img+=0.25").from("#page4 .page4__inner ", {
+    backgroundColor: '#f3f6ff'
+  }, "img+=0.25").to("#page4 .page4__bg .black_bg", {
+    backgroundColor: 'rgba(0, 2, 14, 0.7)'
+  }, "img+=0.10").from("#page4 h2", {
+    opacity: 0
+  }, "img+=0.3");
+  ScrollTrigger.create({
+    animation: ani2,
+    trigger: ".page4__inner",
+    start: "top top",
+    end: "+=800",
+    scrub: true,
+    pin: true,
+    anticipatePin: 1,
+    markers: false
+  });
 }
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
+
+/* page5 swiper */
+{
+  var swiper = new Swiper('.swiper', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    centeredSlides: true,
+    direction: 'horizontal',
+    loop: true,
+    loopAdditionalSlides: 1,
+    freeMode: false,
+    slideToClickedSlide: false,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    },
+    speed: 500,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    on: {
+      slideChange: function slideChange() {
+        var currentIndex = this.realIndex;
+        var allTextArticles = document.querySelectorAll('.page5__text__inner article');
+        allTextArticles.forEach(function (el, index) {
+          if (index === currentIndex) {
+            el.style.opacity = '1';
+            el.style.visibility = 'visible';
+          } else {
+            el.style.opacity = '0';
+            el.style.visibility = 'hidden';
+          }
+        });
+      }
+    },
+    breakpoints: {
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 40
       }
     }
-    cssTimeout = null;
-  }, 50);
+  });
+  var allTextArticles = document.querySelectorAll('.page5__text__inner article');
+  allTextArticles.forEach(function (el, index) {
+    el.style.opcity = index === 0 ? '1' : '0';
+    el.style.visibility = index === 0 ? 'visible' : 'hidden';
+  });
 }
-module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/scss/sub.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+/* page6 gsap scrollTrigger */
+{
+  gsap.registerPlugin(ScrollTrigger);
+  function createAnimation(_ref2) {
+    var endValue = _ref2.endValue;
+    var ani3 = gsap.timeline();
+    ani3.to(".page6__inner .page6__img", {
+      left: '-90vw',
+      filter: 'grayscale(100%)'
+    }, "img").from(".page6__inner .page6__bg", {
+      opacity: 0
+    }, "img+=0.02").from(".page6__inner .page6__text h2", {
+      opacity: 0
+    }, "img+=0.02");
+    ScrollTrigger.create({
+      animation: ani3,
+      trigger: ".page6__inner",
+      start: "top 20% top",
+      end: "+=".concat(endValue),
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      markers: false
+    });
+  }
+  ScrollTrigger.matchMedia({
+    // Desktop
+    "(min-width: 1200px)": function minWidth_1200px() {
+      createAnimation({
+        endValue: 600
+      });
+    },
+    // Tablet
+    "(min-width: 700px) and (max-width: 1199px)": function minWidth_700px_and_MaxWidth_1199px() {
+      createAnimation({
+        endValue: 600
+      });
+    },
+    // Mobile
+    "(max-width: 699px)": function maxWidth_699px() {
+      createAnimation({
+        endValue: 550
+      });
+    }
+  });
+}
+
+// /* page7 click Event */
+{
+  var clickBnt = document.querySelector('.page7__click p');
+  var morImg = document.querySelector('.page7__inner');
+  clickBnt.addEventListener("click", function () {
+    morImg.classList.toggle("active");
+  });
+}
+
+/* scrollToplugin */
+{
+  // header
+  var page1Home = document.querySelector('.page1__menu .home');
+  var page1Prpfile = document.querySelector('.page1__menu .profile');
+  var page1Ux = document.querySelector('.page1__menu .ux');
+  var page1Graphic = document.querySelector('.page1__menu .graphic');
+  page1Home.addEventListener('click', function () {
+    gsap.to(window, 0.5, {
+      scrollTo: 0
+    });
+  });
+  page1Prpfile.addEventListener('click', function () {
+    gsap.to(window, 0.8, {
+      scrollTo: '#page3'
+    });
+  });
+  page1Ux.addEventListener('click', function () {
+    gsap.to(window, 1, {
+      scrollTo: '#page5'
+    });
+  });
+  page1Graphic.addEventListener('click', function () {
+    gsap.to(window, 1.5, {
+      scrollTo: '#page7'
+    });
+  });
+
+  // footer
+  var toTopEl = document.querySelector('.top_button');
+  var page8Home = document.querySelector('.page8__menu .home');
+  var page8Prpfile = document.querySelector('.page8__menu .profile');
+  var page8Ux = document.querySelector('.page8__menu .ux');
+  var page8Graphic = document.querySelector('.page8__menu .graphic');
+  toTopEl.addEventListener('click', function () {
+    gsap.to(window, 1, {
+      scrollTo: 0
+    });
+  });
+  page8Home.addEventListener('click', function () {
+    gsap.to(window, 1, {
+      scrollTo: 0
+    });
+  });
+  page8Prpfile.addEventListener('click', function () {
+    gsap.to(window, 0.5, {
+      scrollTo: '#page3'
+    });
+  });
+  page8Ux.addEventListener('click', function () {
+    gsap.to(window, 0.5, {
+      scrollTo: '#page5'
+    });
+  });
+  page8Graphic.addEventListener('click', function () {
+    gsap.to(window, 0.5, {
+      scrollTo: '#page7'
+    });
+  });
+}
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -341,5 +574,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/sub.c74d4e79.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/js/index.js"], null)
+//# sourceMappingURL=/js.d818e0ef.js.map
