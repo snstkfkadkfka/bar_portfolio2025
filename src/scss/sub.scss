@@ -1,11 +1,14 @@
 @use "./commons" as *;
 #wrap{
   padding: 20px 16px;
+  background-color:rgba($white-color,0.5) ;
   area {
   cursor: pointer;
   pointer-events: auto;
-}
+  }
   header{
+    position: relative;
+    z-index: 999;
     .header_main{
       display: flex;
       padding-bottom: 23px;
@@ -29,7 +32,6 @@
         a{
           display: inline-block;
           width: 160px;
-          
           img{
             object-fit: cover;
             width: 100%;
@@ -162,28 +164,117 @@
     }
   }
   main{
-
-    .main-title{
-      font-family: "Noto Sans KR", sans-serif;
-      border-left: 4px solid $black-color;
-      padding-left: 6px;
-      margin-bottom: 15px;
-      h2{
-        font-size: $font-size-24px;
-        font-weight: 800;
-        padding-bottom: 7px;
-        letter-spacing: -0.5px;
-      }
-      p{
-        font-size: $font-size-32px;
-        font-weight: 600;
-        letter-spacing: -0.7px;
-        span{
-          font-size: $font-size-20px;
+    margin-bottom: 80px;
+    .custom-bnt {
+      width: 150px;
+      height: 36px;
+      border-radius: 5px;
+      font-family: sans-serif;
+      font-weight: 500;
+      color: $white-color;
+      background: linear-gradient(0deg, rgba($main-color,1) 0%, rgba($main-color,0.8) 100%);
+      display: inline-block;
+      text-align: center;
+      line-height: 36px;
+      position: absolute;
+      overflow: hidden;
+      right: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow:
+        inset 2px 2px 2px rgba(255, 255, 255, 0.5),
+        7px 7px 20px rgba(0, 0, 0, 0.1),
+        4px 4px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      span {
+        display: block;
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease;
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          background:rgba($main-color,0.7);
+          transition: all 0.3s ease;
+        }
+        &::before {
+          width: 2px;
+          height: 0%;
+        }
+        &::after {
+          width: 0%;
+          height: 2px;
         }
       }
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        background:rgba($main-color,0.7);
+        transition: all 0.3s ease;
+      }
+      &::before {
+        height: 0%;
+        width: 2px;
+      }
+      &::after {
+        width: 0%;
+        height: 2px;
+      }
+      &:hover {
+        background: transparent;
+        box-shadow: none;
+        &::before {
+          height: 100%;
+        }
+        &::after {
+          width: 100%;
+        }
+        span {
+          color: $main-color;
+          &::before {
+            height: 100%;
+          }
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+      &.bnt1{
+        top: 75px;
+      }
     }
-    &>span{
+    .year{
+      font-size: $font-size-20px;
+      display: inline-block;
+      padding-bottom: 8px;
+      padding-left: 10px;
+      font-family: "Space Grotesk";
+    }
+    .main-title{
+      font-family: "Space Grotesk";
+      border-left: 4px solid $black-color;
+      padding:5px 0 5px 6px;
+      margin-bottom: 15px;
+      letter-spacing: -1px;
+      h2{
+        font-size: $font-size-24px;
+        margin-bottom: 4px;
+        font-weight: 500;
+
+      }
+      p{
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: $font-size-40px;
+        font-weight: bold;
+      }
+    }
+    & .tag{
       font-family: "Noto Sans KR", sans-serif;
       margin-bottom: 10px;
       display: inline-block;
@@ -201,7 +292,7 @@
       width: 100%;
       border-radius: 20px;
       &:nth-of-type(1){
-        margin-bottom: 10px;
+        margin-bottom: 14px;
       }
       img{
         width: 100%; object-fit: cover;
@@ -211,39 +302,39 @@
         area{
           background-color: darkgoldenrod;
         }
-        }
+      }
     }
   }
-}
-@media (min-width:1200px) {
-  #wrap{
-    width: 100%;
-    margin-left: 380px;
-    header{
-      .header_main{
-        display: none;
-      }
-      .header_menu{
-        margin-left: 0vw;
-        width: 380px;
-        .menu_inner{
-          &>i{display: none;}
-          nav{
-            .gnb{
-              &>li{
-                &>div{
-                  i{
-                    font-size: $font-size-20px;
-                  }
-                  a{
-                    font-size: $font-size-20px;
-                  }
-  
-                }
-                .sub{
-                  li{
+  @media (min-width:1200px) {
+    &{
+      width: 100%;
+      margin-left: 380px;
+      header{
+        .header_main{
+          display: none;
+        }
+        .header_menu{
+          margin-left: 0vw;
+          width: 380px;
+          .menu_inner{
+            &>i{display: none;}
+            nav{
+              .gnb{
+                &>li{
+                  &>div{
+                    i{
+                      font-size: $font-size-20px;
+                    }
                     a{
-                      font-size: $font-size-16px;
+                      font-size: $font-size-20px;
+                    }
+    
+                  }
+                  .sub{
+                    li{
+                      a{
+                        font-size: $font-size-16px;
+                      }
                     }
                   }
                 }
@@ -252,20 +343,29 @@
           }
         }
       }
-    }
-    main{
-      padding: 40px 30px 40px;
-      .main-title{
-        padding-bottom: 5px;
-        h2{font-size: $font-size-24px;}
-      }
-      &>span{
-        font-size: $font-size-14px;
-        font-weight: 400;
-      }
-      article{
-        margin-top: 10px;
-        width: calc(100% - 390px);
+      main{
+        padding: 40px 30px 40px;
+        .custom-bnt {
+          width: 200px;
+          height: 40px;
+          line-height: 40px;
+          right: 30px;
+          &.bnt1{
+            top: 180px;
+          }
+        }
+        .main-title{
+          padding-bottom: 5px;
+          h2{font-size: $font-size-24px;}
+        }
+        & .tag{
+          font-size: $font-size-14px;
+          font-weight: 400;
+        }
+        article{
+          margin-top: 10px;
+          width: calc(100% - 390px);
+        }
       }
     }
   }

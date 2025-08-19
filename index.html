@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="/favicon.ico" type="icon">
+
   <meta name="author" content="배아람" />
   <title>portfolio</title>
   <!-- css Reset -->
@@ -30,9 +32,14 @@
   <!-- splin cdn -->
 <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
 
+<!-- animate.css -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <!-- user -->
   <link rel="stylesheet" href="./src/scss/main.scss"/>
-  <script defer src="./src/js/main.js" type="module"></script>
+  <script defer src="./src/js/index.js"></script>
 </head>
 <body>
   <div id="wrap">
@@ -124,7 +131,7 @@
             <div class="text">
               <span>BAE AHRAM</span>
               <p class="name"><strong>배아람</strong></p>
-              <a href="#">
+              <a href="./src/resume.pdf" target="_blank">
                 이력서 바로가기
                 <button>
                   <p class="fa-solid fa-chevron-right arrow"></p>
@@ -161,9 +168,9 @@
       <div class="page3__side__skill">
         <div class="skill_bg">
           <div class="button">
-            <i class="fa-solid fa-chevron-left"></i>
-            <i class="fa-solid fa-chevron-left"></i>
-            <i class="fa-solid fa-chevron-left"></i>
+            <img src="./src/images/arrow_back.svg" alt="arrow버튼">
+            <img src="./src/images/arrow_back.svg" alt="arrow버튼">
+            <img src="./src/images/arrow_back.svg" alt="arrow버튼">
           </div>
           <div class="box"></div>
         </div>
@@ -230,32 +237,32 @@
         </div>
         <h2>UX/UI 디자인</h2>
         <div class="page4__img">
-          <div class="wep_img img1">
+          <div class="wep_img odd">
             <div></div>
           </div>
-          <div class="wep_img img2">
+          <div class="wep_img even">
             <div></div>
           </div>
-          <div class="wep_img img3">
+          <div class="wep_img odd">
             <div></div>
           </div>
-          <div class="wep_img img4">
+          <div class="wep_img even">
             <div></div>
           </div>
         </div>
         <div class="page4__text">
-          <p class="txt1">01. The Vintage Wine Merchants 리뉴얼 01. The Vintage Wine Merchants 리뉴얼</p>
-          <p class="txt2">02 Bose 리뉴얼 2024년 제작 02 Bose 리뉴얼 2024년 제작</p>
-          <p class="txt3">03. Budsies 리뉴얼 03. Budsies 리뉴얼 03. Budsies 리뉴얼</p>
-          <p class="txt4">04. PRELUDE 홈페이지 04. PRELUDE 홈페이지 04. PRELUDE 홈페이지</p>
-          <p class="txt5">05. 타GO 모바일 제작 05. 타GO 모바일 제작 05. 타GO 모바일 제작</p>
-          <p class="txt6">06. CSS Quset 게임어플 제작 06. CSS Quset 게임어플 제작</p>
+          <p class="txt1">01. The Vintage Wine Merchants 리뉴얼 2024년 제작 </p>
+          <p class="txt2">02 Bose 리뉴얼 2024년 제작</p>
+          <p class="txt3">03. Budsies 리뉴얼 2024년 제작</p>
+          <p class="txt4">04. PRELUDE 홈페이지 2025년 제작</p>
+          <p class="txt5">05. 타GO 모바일 2025년 제작 </p>
+          <p class="txt6">06. 감정일기장 2025년 제작</p>
         </div>
       </div>
     </section>
     <section id="page5">
+      <h3>UX/UI Design</h3>
       <div class="page5__inner inner">
-        <h3>UX/UI Design</h3>
         <article class="page5__slide swiper">
           <ul class="swiper-wrapper">
             <li class="swiper-slide"><a href="./styleGuide.html#boss">
@@ -292,7 +299,10 @@
               </p>
               <div class="text_bottom">
                 <div class="program">
-                  <p>사용 프로그램 <span> #피그마 #일러스트 #포토샵 #비주얼스튜디오코드(html, css, javascript, jQuery)</span> </p>
+                  <p>사용 프로그램</p> 
+                  <span> 
+                    #피그마 #일러스트 #포토샵 #비주얼스튜디오코드(html, css, javascript, jQuery)
+                  </span>
                 </div>
                 <div class="color_key">
                   <div></div>
@@ -308,14 +318,17 @@
                 The Vintage Wine Merchants는 다양한 술을 고객에게 제공하는 회사로, 주로 와인을 판매합니다. 
                 각 페이지는 모던하고 고급스러우며, 심플하면서도 전통적인 분위기를 표현하기 위해 레드, 버건디, 레드브라운 등의 컬러를 주로 사용하였습니다.
                 와인 페이지에서는 와인을 제작 국가별, 종류별, 가격별로 검색할 수 있는 UI 디자인이 적용되어 있습니다.
-                
+    
                 사이트는 메인 페이지, 와인 페이지, 상세 페이지, 검색 페이지의 4개의 페이지로 구성되어 있습니다
                 <br>
                 
               </p>
               <div class="text_bottom">
                 <div class="program">
-                  <p>사용 프로그램 <span> #피그마 #애프터이펙트 #프리미어 #비주얼스튜디오코드(html, css, javascript, jQuery)</span> </p>
+                  <p>사용 프로그램</p>
+                  <span> 
+                    #피그마 #애프터이펙트 #프리미어 #비주얼스튜디오코드(html, css, javascript, jQuery)
+                  </span>
                 </div>
                 <div class="color_key">
                   <div></div>
@@ -334,7 +347,10 @@
               </p>
               <div class="text_bottom">
                 <div class="program">
-                  <p>사용 프로그램 <span> #피그마 #일러스트 #포토샵 #비주얼스튜디오코드(html, css, javascript, jQuery)</span> </p>
+                  <p>사용 프로그램</p>
+                  <span> 
+                    #피그마 #일러스트 #포토샵 #비주얼스튜디오코드(html, css, javascript, jQuery)
+                  </span>
                 </div>
                 <div class="color_key">
                   <div></div>
@@ -353,7 +369,10 @@
               </p>
               <div class="text_bottom">
                 <div class="program">
-                  <p>사용 프로그램 <span> #포토샵 #일러스트 #비주얼스튜디오코드(html, scss)</span> </p>
+                  <p>사용 프로그램</p>
+                  <span> 
+                    #포토샵 #일러스트 #비주얼스튜디오코드(html, scss)
+                  </span>
                 </div>
                 <div class="color_key">
                   <div></div>
@@ -376,7 +395,10 @@
               </p>
               <div class="text_bottom">
                 <div class="program">
-                  <p>사용 프로그램 <span> #피그마 #비주얼스튜디오코드(Vue3, scss)</span></p>
+                  <p>사용 프로그램</p> 
+                  <span> 
+                    #피그마 #비주얼스튜디오코드(Vue3, scss)
+                  </span>
                 </div>
                 <div class="color_key">
                   <div></div>
@@ -393,7 +415,10 @@
               </p>
               <div class="text_bottom">
                 <div class="program">
-                  <p>사용 프로그램 <span> #피그마 #비주얼스튜디오코드(React-vite, scss)</span></p>
+                  <p>사용 프로그램 </p>
+                  <span> 
+                    #피그마 #비주얼스튜디오코드(React-vite, scss)
+                  </span>
                 </div>
                 <div class="color_key">
                   <div></div>
@@ -409,9 +434,6 @@
     </section>
     <section id="page6">
       <div class="page6__inner">
-        <div class="page6__bg">
-          <div class="bg_wihte"></div>
-        </div>
         <div class="page6__img">
           <ul>
             <li class="desing_1"></li>
@@ -429,7 +451,6 @@
           <h2>그래픽 디자인</h2>
         </div>
       </div>
-
     </section>
     <section id="page7">
       <div class="page7__inner inner">
@@ -509,14 +530,16 @@
           </figure>
         </div>
         <div class="page7__button">
-          <a href="#">
-            <span class="./styleGuide.html#diy_cardbanner">
+          <a href="./styleGuide.html#diy_cardbanner">
+            <span class="kr ">
               스타일 가이드
             </span>
             <span class="en">
-              Style<br/>Guide
+              Style Guide
             </span>
-            <p class="fa-solid fa-chevron-right arrow"></p>
+            <p class="arrow">
+              <i class="fa-solid fa-arrow-right "></i>
+            </p>
           </a>
         </div>
       </div>
@@ -528,7 +551,6 @@
       <div class="page8__mouse">
         <div class="spliner">
           <spline-viewer url="https://prod.spline.design/EkU1Le4QX5PFk3Ud/scene.splinecode"></spline-viewer>
-          
         </div>
       </div>
       <div class="page8__inner inner">
@@ -552,10 +574,7 @@
           <p>top</p>
         </div>
       </div>
-
     </footer>
   </div>
-
-    
 </body>
 </html>

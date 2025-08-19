@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 /* reset */
 a{text-decoration: none;color: inherit;}
 /* font */
 body{font: 12px "Noto Sans KR", sans-serif; 
   overflow-x: hidden;
   scroll-behavior: smooth;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
 }
 /* common */
 .inner{max-width: 1200px;margin: 0 auto;}
@@ -44,9 +49,10 @@ $font-size-96px:6rem;
 
 /* 변수 */
 @mixin title-h2{
+  font-family: $roboto-font;
   width: 100%;
   position: absolute;
-  font-size: $font-size-64px;
+  font-size: $font-size-50px;
   font-weight: bold;
   color: $main-color;
   top: 50%;

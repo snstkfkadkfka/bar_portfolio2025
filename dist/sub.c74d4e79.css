@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 /* reset */
 a {
   text-decoration: none;
@@ -11,6 +12,10 @@ body {
   font: 12px "Noto Sans KR", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
 }
 
 /* common */
@@ -40,10 +45,15 @@ body {
 /* 변수 */
 #wrap {
   padding: 20px 16px;
+  background-color: rgba(243, 246, 255, 0.5);
 }
 #wrap area {
   cursor: pointer;
   pointer-events: auto;
+}
+#wrap header {
+  position: relative;
+  z-index: 999;
 }
 #wrap header .header_main {
   display: flex;
@@ -194,27 +204,113 @@ body {
   color: #ffa143;
   background-color: rgba(217, 217, 217, 0.08);
 }
+#wrap main {
+  margin-bottom: 80px;
+}
+#wrap main .custom-bnt {
+  width: 150px;
+  height: 36px;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-weight: 500;
+  color: #f3f6ff;
+  background: linear-gradient(0deg, #ffa143 0%, rgba(255, 161, 67, 0.8) 100%);
+  display: inline-block;
+  text-align: center;
+  line-height: 36px;
+  position: absolute;
+  overflow: hidden;
+  right: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.5), 7px 7px 20px rgba(0, 0, 0, 0.1), 4px 4px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+#wrap main .custom-bnt span {
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+#wrap main .custom-bnt span::before, #wrap main .custom-bnt span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: rgba(255, 161, 67, 0.7);
+  transition: all 0.3s ease;
+}
+#wrap main .custom-bnt span::before {
+  width: 2px;
+  height: 0%;
+}
+#wrap main .custom-bnt span::after {
+  width: 0%;
+  height: 2px;
+}
+#wrap main .custom-bnt::before, #wrap main .custom-bnt::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 161, 67, 0.7);
+  transition: all 0.3s ease;
+}
+#wrap main .custom-bnt::before {
+  height: 0%;
+  width: 2px;
+}
+#wrap main .custom-bnt::after {
+  width: 0%;
+  height: 2px;
+}
+#wrap main .custom-bnt:hover {
+  background: transparent;
+  box-shadow: none;
+}
+#wrap main .custom-bnt:hover::before {
+  height: 100%;
+}
+#wrap main .custom-bnt:hover::after {
+  width: 100%;
+}
+#wrap main .custom-bnt:hover span {
+  color: #ffa143;
+}
+#wrap main .custom-bnt:hover span::before {
+  height: 100%;
+}
+#wrap main .custom-bnt:hover span::after {
+  width: 100%;
+}
+#wrap main .custom-bnt.bnt1 {
+  top: 75px;
+}
+#wrap main .year {
+  font-size: 1.25rem;
+  display: inline-block;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  font-family: "Space Grotesk";
+}
 #wrap main .main-title {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Space Grotesk";
   border-left: 4px solid #00020e;
-  padding-left: 6px;
+  padding: 5px 0 5px 6px;
   margin-bottom: 15px;
+  letter-spacing: -1px;
 }
 #wrap main .main-title h2 {
   font-size: 1.5rem;
-  font-weight: 800;
-  padding-bottom: 7px;
-  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+  font-weight: 500;
 }
 #wrap main .main-title p {
-  font-size: 2rem;
-  font-weight: 600;
-  letter-spacing: -0.7px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
-#wrap main .main-title p span {
-  font-size: 1.25rem;
-}
-#wrap main > span {
+#wrap main .tag {
   font-family: "Noto Sans KR", sans-serif;
   margin-bottom: 10px;
   display: inline-block;
@@ -233,7 +329,7 @@ body {
   border-radius: 20px;
 }
 #wrap main article:nth-of-type(1) {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 #wrap main article img {
   width: 100%;
@@ -245,7 +341,6 @@ body {
 #wrap main article map area {
   background-color: darkgoldenrod;
 }
-
 @media (min-width: 1200px) {
   #wrap {
     width: 100%;
@@ -273,13 +368,22 @@ body {
   #wrap main {
     padding: 40px 30px 40px;
   }
+  #wrap main .custom-bnt {
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    right: 30px;
+  }
+  #wrap main .custom-bnt.bnt1 {
+    top: 180px;
+  }
   #wrap main .main-title {
     padding-bottom: 5px;
   }
   #wrap main .main-title h2 {
     font-size: 1.5rem;
   }
-  #wrap main > span {
+  #wrap main .tag {
     font-size: 0.8rem;
     font-weight: 400;
   }
