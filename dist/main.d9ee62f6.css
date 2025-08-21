@@ -8,6 +8,12 @@ a {
 }
 
 /* font */
+html, body {
+  scroll-behavior: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   font: 12px "Noto Sans KR", sans-serif;
   overflow-x: hidden;
@@ -56,6 +62,7 @@ body {
   height: 100%;
   outline: 1px dotted red;
   width: 100%;
+  will-change: transform, opacity;
 }
 #page1 .page1__bg div {
   top: 31%;
@@ -320,7 +327,7 @@ body {
   }
   100% {
     opacity: 0;
-    transform: scale(10);
+    transform: scale(5);
   }
 }
 #page2 {
@@ -334,10 +341,10 @@ body {
 #page2 .page2__inner {
   position: sticky;
   top: 0;
-  width: 100%;
+  max-width: 1920px;
   height: 100vh;
   overflow: hidden;
-  transition: tran;
+  margin: 0 auto;
 }
 #page2 .page2__inner .page2__bg {
   position: absolute;
@@ -346,7 +353,7 @@ body {
   height: 100%;
 }
 #page2 .page2__inner .page2__bg .rebon {
-  position: fixed;
+  position: absolute;
 }
 #page2 .page2__inner .page2__bg .rebon .rebon_text {
   transform: rotate(-10deg);
@@ -390,13 +397,11 @@ body {
   font-size: 53px;
 }
 #page2 .page2__inner .page2__bg .rebon.rebon1 {
-  position: fixed;
   top: 100px;
   height: 150px;
   transform: translate(-190vw) translateY(30vh) scale(0.5);
   will-change: transform;
   opacity: 0.1;
-  transition: transform 0.3s ease-out;
 }
 #page2 .page2__inner .page2__bg .rebon.rebon1 span {
   animation: text-right 20s linear infinite;
@@ -406,7 +411,6 @@ body {
   height: 95px;
   top: 380px;
   opacity: 0.5;
-  transition: transform 0.3s ease-out;
 }
 #page2 .page2__inner .page2__bg .rebon.rebon2 span {
   animation: text-left 20s linear infinite;
@@ -423,13 +427,12 @@ body {
   color: #f3f6ff;
   transform: scale(1);
   opacity: 0;
-  transition: 0.3 ease-in-out;
 }
-#page2 .page2__text h2 {
+#page2 .page2__text h1 {
   position: relative;
   font-weight: initial;
 }
-#page2 .page2__text h2 span {
+#page2 .page2__text h1 span {
   font-weight: bold;
   color: #ffa143;
 }
@@ -445,6 +448,12 @@ body {
 #page2 .page2__text p:nth-of-type(2) {
   align-self: flex-end;
   transform: scaleY(-1);
+}
+#page2 .rebon1,
+#page2 .rebon2,
+#page2 .page2__text {
+  will-change: transform, opacity;
+  transition: transform 0.3s ease-out, opacity 0.3 ease-out;
 }
 
 /* page2 bg right */
@@ -636,7 +645,7 @@ body {
   outline: 1px solid #ffa143;
   color: #ffa143;
 }
-#page3 .page3__inner .page3__left__prof .box .text a button {
+#page3 .page3__inner .page3__left__prof .box .text a .button {
   display: none;
 }
 #page3 .page3__inner .page3__left__prof .box p.ect {
@@ -887,7 +896,7 @@ body {
     outline: none;
     color: inherit;
   }
-  #page3 .page3__inner .page3__left__prof .box .text a button {
+  #page3 .page3__inner .page3__left__prof .box .text a .button {
     display: block;
     margin-top: 14px;
     color: #f3f6ff;
@@ -898,7 +907,7 @@ body {
     padding: 0;
     cursor: pointer;
   }
-  #page3 .page3__inner .page3__left__prof .box .text a button p.arrow {
+  #page3 .page3__inner .page3__left__prof .box .text a .button p.arrow {
     height: 1px;
     justify-content: flex-end;
     background-color: #f3f6ff;
@@ -1019,7 +1028,7 @@ body {
     outline: none;
     color: inherit;
   }
-  #page3 .page3__inner .page3__left__prof .box .text a button {
+  #page3 .page3__inner .page3__left__prof .box .text a .button {
     background-color: firebrick;
     display: block;
     margin-top: 14px;
@@ -1031,7 +1040,7 @@ body {
     padding: 0;
     cursor: pointer;
   }
-  #page3 .page3__inner .page3__left__prof .box .text a button p.arrow {
+  #page3 .page3__inner .page3__left__prof .box .text a .button p.arrow {
     position: relative;
     justify-content: flex-end;
     width: 148px;
@@ -1039,7 +1048,7 @@ body {
     color: #f3f6ff;
     align-items: center;
   }
-  #page3 .page3__inner .page3__left__prof .box .text a button p.arrow::after {
+  #page3 .page3__inner .page3__left__prof .box .text a .button p.arrow::after {
     content: "";
     position: absolute;
     display: block;
@@ -1103,7 +1112,6 @@ body {
 #page4 {
   position: relative;
   height: 300vh;
-  transition: transform 0.3s ease-out;
 }
 #page4 .page4__inner {
   position: sticky;
@@ -1111,6 +1119,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  transition: transform 0.3s ease-out;
 }
 #page4 .page4__inner .page4__bg .circle_bg {
   position: absolute;
@@ -1121,7 +1130,6 @@ body {
   background-color: rgba(0, 2, 14, 0.2);
   border-radius: 50%;
   z-index: -1;
-  transition: transform 0.3s ease-out;
 }
 #page4 .page4__inner h2 {
   font-family: "Roboto", sans-serif;
@@ -1188,7 +1196,6 @@ body {
   font-size: 0.8rem;
   opacity: 0.5;
   font-weight: bold;
-  transition: transform 0.3s ease-out;
 }
 #page4 .page4__inner .page4__text p:nth-child(1) {
   top: 10vh;
@@ -1212,6 +1219,13 @@ body {
   top: 90vh;
   font-size: 1rem;
   opacity: 0.4;
+}
+#page4 .page4__inner .even div,
+#page4 .page4__inner .odd div,
+#page4 .circle_bg,
+#page4 .page4__inner h2 {
+  will-change: transform, opacity, filter;
+  transition: transform 0.3s ease-out;
 }
 
 @media (min-width: 700px) and (max-width: 1199px) {
@@ -1325,12 +1339,19 @@ body {
   display: flex;
 }
 #page5 .Page5__trxt .page5__text__inner article {
+  opacity: 0;
+  visibility: hidden;
   box-sizing: border-box;
   max-width: 1200px;
   height: 100%;
   position: absolute;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  will-change: opacity, visibility;
   padding: 0 30px;
+}
+#page5 .Page5__trxt .page5__text__inner article.active {
+  opacity: 1;
+  visibility: visible;
 }
 #page5 .Page5__trxt .page5__text__inner article h4 {
   color: #ffa143;
@@ -1549,15 +1570,17 @@ body {
 #page6 .page6__inner {
   position: sticky;
   top: 0;
-  width: 100vw;
+  max-width: 1920px;
   height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
+  margin: 0 auto;
 }
 #page6 .page6__inner .page6__img {
   height: 50vh;
   transition: 0.3s ease-out;
+  will-change: transform;
 }
 #page6 .page6__inner .page6__img ul {
   display: flex;
@@ -1577,31 +1600,31 @@ body {
   border-radius: 10px;
 }
 #page6 .page6__inner .page6__img ul .desing_1 {
-  background-image: url(/design01.77e9b13b.jpg);
+  background-image: url(/design01.ee0bfb93.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_2 {
-  background-image: url(/design02.e4790c71.jpg);
+  background-image: url(/design02.696f5d64.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_3 {
-  background-image: url(/design03.1e780950.jpg);
+  background-image: url(/design03.5d74ba93.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_4 {
-  background-image: url(/design04.76f80f1d.jpg);
+  background-image: url(/design04.6742f2c8.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_5 {
-  background-image: url(/design05.47ef284f.jpg);
+  background-image: url(/design05.82c465a9.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_6 {
-  background-image: url(/design06.aa16d144.jpg);
+  background-image: url(/design06.868c5545.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_7 {
-  background-image: url(/design07.4a1f576c.jpg);
+  background-image: url(/design07.669a23c2.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_8 {
-  background-image: url(/design08.79786070.jpg);
+  background-image: url(/design08.da2e7194.webp);
 }
 #page6 .page6__inner .page6__img ul .desing_9 {
-  background-image: url(/design09.1746b89b.jpg);
+  background-image: url(/design09.832abed8.webp);
 }
 #page6 .page6__inner .page6__text {
   position: absolute;
@@ -1640,7 +1663,7 @@ body {
   transition: 0.5s;
 }
 #page7 .page7__inner.active {
-  height: 303vw;
+  height: 320vw;
 }
 #page7 .page7__inner h3 {
   width: 25vh;
@@ -1658,21 +1681,21 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px 16px;
 }
-#page7 .page7__inner .page7__img figure {
+#page7 .page7__inner .page7__img .content {
   position: relative;
   border-radius: 10%;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-#page7 .page7__inner .page7__img figure img {
+#page7 .page7__inner .page7__img .content img {
   background-color: #00020e;
   width: 100%;
   height: 100%;
   transition: 0.4s;
   object-fit: cover;
 }
-#page7 .page7__inner .page7__img figure p {
+#page7 .page7__inner .page7__img .content p {
   position: absolute;
   opacity: 0;
   text-align: center;
@@ -1685,29 +1708,31 @@ body {
   transition: 0.4s;
   color: #e5e5e5;
 }
-#page7 .page7__inner .page7__img figure:hover img, #page7 .page7__inner .page7__img figure:focus img {
+#page7 .page7__inner .page7__img .content:hover img, #page7 .page7__inner .page7__img .content:focus img {
   filter: brightness(50%);
   transform: scale(1.1);
 }
-#page7 .page7__inner .page7__img figure:hover p, #page7 .page7__inner .page7__img figure:focus p {
+#page7 .page7__inner .page7__img .content:hover p, #page7 .page7__inner .page7__img .content:focus p {
   opacity: 1;
 }
 #page7 .page7__inner .page7__button {
+  display: block;
   position: absolute;
   top: 25px;
   right: 10px;
-  transition: 0.2s;
-}
-#page7 .page7__inner .page7__button.animate__bounceIn:hover a {
-  color: #ffa143;
 }
 #page7 .page7__inner .page7__button a {
+  transition: 0.2s;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #00020e;
   font-size: 1.5rem;
   padding-right: 10px;
+}
+#page7 .page7__inner .page7__button a:hover {
+  transform: translateX(10px);
+  color: #ffa143;
 }
 #page7 .page7__inner .page7__button a span.kr {
   display: none;
@@ -1807,10 +1832,10 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 18px 16px;
   }
-  #page7 .page7__inner .page7__img figure {
+  #page7 .page7__inner .page7__img .content {
     border-radius: 7%;
   }
-  #page7 .page7__inner .page7__img figure p {
+  #page7 .page7__inner .page7__img .content p {
     font-size: 2rem;
   }
   #page7 .page7__inner .page7__button {
@@ -1856,6 +1881,7 @@ body {
   background-color: #00020e;
 }
 #page8 .page8__mouse .spliner {
+  display: none;
   top: 0;
   left: 0;
   width: 100vw;
@@ -1943,6 +1969,9 @@ body {
 }
 
 @media (min-width: 460px) and (max-width: 699px) {
+  #page8 .page8__mouse .spliner {
+    display: block;
+  }
   #page8 .page8__inner .page8__text p {
     font-size: 1.5rem;
   }
@@ -1953,6 +1982,9 @@ body {
 @media (min-width: 700px) and (max-width: 1199px) {
   #page8 {
     padding: 200px 20px 90px;
+  }
+  #page8 .page8__mouse .spliner {
+    display: block;
   }
   #page8 .page8__inner .page8__text p {
     font-size: 2.5rem;
@@ -2002,6 +2034,9 @@ body {
 @media (min-width: 1200px) {
   #page8 {
     padding: 200px 20px 90px;
+  }
+  #page8 .page8__mouse .spliner {
+    display: block;
   }
   #page8 .page8__inner .page8__text p {
     font-size: 2.5rem;

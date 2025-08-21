@@ -8,6 +8,12 @@ a {
 }
 
 /* font */
+html, body {
+  scroll-behavior: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   font: 12px "Noto Sans KR", sans-serif;
   overflow-x: hidden;
