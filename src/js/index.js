@@ -1,343 +1,344 @@
-/* page2, page4, page6 scroll Animation */
-class ScrollBase {
-  constructor(mainSelector, stickySelector) {
-    this.main = document.querySelector(mainSelector);
-    this.sticky = document.querySelector(stickySelector);
-    this.start = 0;
-    this.end = 0;
-    this.ticking = false;
-
-    this.onScroll = this.onScroll.bind(this);
-    this.onResize = this.onResize.bind(this);
-  }
-
-  init() {
-    // 각 클래스에서 오버라이드
-  }
-
-  animate() {
-    // 각 클래스에서 오버라이드
-  }
-
-  onScroll() {
-    if (!this.ticking) {
-      this.ticking = true;
-      window.requestAnimationFrame(() => {
-        this.animate();
-        this.ticking = false;
-      });
-    }
-  }
-
-  onResize() {
-    clearTimeout(this.resizeTimeout);
-    this.resizeTimeout = setTimeout(() => {
-      this.init();
-      this.animate();
-    }, 200);
-  }
-
-  addListeners() {
-    window.addEventListener("scroll", this.onScroll);
-    window.addEventListener("resize", this.onResize);
-    document.addEventListener("DOMContentLoaded", () => {
-      this.init();
-      this.animate();
-    });
-  }
+function setVhUnit() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
+setVhUnit();
 
+['resize', 'orientationchange'].forEach(event => {
+  window.addEventListener(event, setVhUnit);
+});
+/* page2 scroll Animation */
+{
+  class Scroll {
+    constructor(main, sticky) {
+      this.main = main;
+      this.sticky = sticky;
+      this.rebon1 = sticky.querySelector('.rebon1');
+      this.rebon2 = sticky.querySelector('.rebon2');
+      this.text = sticky.querySelector('.page2__text');
 
-// page2 스크롤 애니메이션
-class Page2Scroll extends ScrollBase {
-  constructor(mainSelector, stickySelector) {
-    super(mainSelector, stickySelector);
-    this.rebon1 = this.sticky.querySelector('.rebon1');
-    this.rebon2 = this.sticky.querySelector('.rebon2');
-    this.text = this.sticky.querySelector('.page2__text');
-    this.step = 0;
-  }
-
-  init() {
-    this.start = this.main.offsetTop - 300;
-    this.end = this.main.offsetTop + this.main.offsetHeight - window.innerHeight;
-    this.step = (this.end - this.start) / 8;
-  }
-
-  animate() {
-    const scrollY = window.scrollY;
-    const s = this.start;
-    const e = this.end;
-    const step = this.step;
-    const maxAnimRebon1 = s + step * 6;
-    const maxAnimRebon2 = s + step * 7;
-
-    // rebon1
-    if (this.rebon1) {
-      let transform = '';
-      let opacity = '';
-
-      if (scrollY <= s) {
-        transform = `translateX(-190vw) translateY(30vh) scale(0.5)`;
-        opacity = '0.1';
-      } else if (scrollY < maxAnimRebon1) {
-        const progress = (scrollY - s) / (step * 6);
-        const moveX = -190 + (progress * 230);
-        const moveY = 30 - (progress * 40);
-        transform = `translateX(${moveX}vw) translateY(${moveY}vh) scale(0.5)`;
-        opacity = '0.1';
-      } else if (scrollY <= e + window.innerHeight) {
-        transform = `translateX(40vw) translateY(-10vh) scale(0.5)`;
-        const fadeProgress = 0.1 * (1 - (scrollY - e) / window.innerHeight);
-        opacity = fadeProgress.toFixed(2);
-      } else {
-        opacity = '0';
-      }
-      this.rebon1.style.transform = transform;
-      this.rebon1.style.opacity = opacity;
+      this.start = 0;
+      this.end = 0;
+      this.step = 0;
+      this.ticking = false;
+      this.isMobile = window.innerWidth < 768;
     }
 
-    // rebon2
-    if (this.rebon2) {
-      let transform = '';
-      let opacity = '';
-      if (scrollY <= s) {
-        transform = `translateX(160vw) translateY(0vh) scale(0.5)`;
-        opacity = '0.5';
-      } else if (scrollY < maxAnimRebon1) {
-        const progress = (scrollY - s) / (step * 6);
-        const moveX = 160 + (progress * -110);
-        const moveY = 0 - (progress * -10);
-        transform = `translateX(${moveX}vw) translateY(${moveY}vh) scale(0.5)`;
-        opacity = '0.5';
-      } else if (scrollY <= e + window.innerHeight) {
-        transform = `translateX(50vw) translateY(10vh) scale(0.5)`;
-        const fadeProgress = 0.5 * (1 - (scrollY - e) / window.innerHeight);
-        opacity = fadeProgress.toFixed(2);
-      } else {
-        opacity = '0';
-      }
-      this.rebon2.style.transform = transform;
-      this.rebon2.style.opacity = opacity;
+    init() {
+      this.isMobile = window.innerWidth < 768;
+      this.start = this.main.offsetTop - 300;
+      this.end = this.main.offsetTop + this.main.offsetHeight - window.innerHeight;
+      this.step = (this.end - this.start) / (this.isMobile ? 5 : 8);
     }
 
-    // text
-    if (this.text) {
-      let transform = '';
-      let opacity = '';
-      if (scrollY <= s) {
-        transform = `scale(1)`;
-        opacity = `0`;
-      } else if (scrollY < maxAnimRebon2) {
-        const progress = (scrollY - s) / (step * 7);
-        const scaleValue = 1 + progress * 0.5;
-        transform = `scale(${scaleValue})`;
-        opacity = `${progress.toFixed(2)}`;
-      } else {
-        transform = `scale(1.5)`;
-        opacity = '1';
-      }
-      this.text.style.transform = transform;
-      this.text.style.opacity = opacity;
-    }
-  }
-}
+    animate() {
+      const scrollY = window.scrollY;
+      const s = this.start;
+      const e = this.end;
+      const step = this.step;
 
+      const maxAnimRebon1 = s + step * 6;
+      const maxAnimRebon2 = s + step * 7;
 
-// page4 스크롤 애니메이션
-class Page4Scroll extends ScrollBase {
-  constructor(mainSelector, stickySelector) {
-    super(mainSelector, stickySelector);
-    this.h2El = this.sticky.querySelector("h2");
-    this.even = this.sticky.querySelectorAll(".even div");
-    this.odd = this.sticky.querySelectorAll(".odd div");
-    this.texts = this.sticky.querySelectorAll(".page4__text p");
-    this.circle = this.sticky.querySelector(".circle_bg");
-  }
+      // 리본 1
+      if (this.rebon1) {
+        let transform = '';
+        let opacity = '';
 
-  init() {
-    this.start = this.main.offsetTop - window.innerHeight;
-    this.end = this.main.offsetTop + this.main.offsetHeight - window.innerHeight * 1.5;
-  }
+        const startX = this.isMobile ? -100 : -190;
+        const endX = this.isMobile ? 20 : 40;
+        const startY = this.isMobile ? 20 : 30;
+        const endY = this.isMobile ? -5 : -10;
 
-  animate() {
-    const scrollY = window.scrollY;
-    const s = this.start;
-    const e = this.end;
-
-    // even
-    this.even.forEach(content => {
-      if (scrollY <= s) {
-        content.style.transform = `translateY(-200vh)`;
-        content.style.filter = 'brightness(120%)';
-      } else if (scrollY > s && scrollY < e) {
-        const progress = (scrollY - s) / (e - s);
-        const move = -200 + (progress * 200);
-        const brightness = 120 - (progress * 90);
-        const rounded = Math.round(brightness / 10) * 10;
-
-        content.style.transform = `translateY(${move}vh)`;
-        content.style.filter = `brightness(${rounded}%)`;
-      } else {
-        content.style.transform = `translateY(0vh)`;
-        content.style.filter = `brightness(30%)`;
-      }
-    });
-
-    // odd
-    this.odd.forEach(content => {
-      if (scrollY <= s) {
-        content.style.transform = `translateY(200vw)`;
-        content.style.filter = 'brightness(120%)';
-      } else if (scrollY > s && scrollY < e) {
-        const progress = (scrollY - s) / (e - s);
-        const brightness = 120 - (progress * 90);
-        const rounded = Math.round(brightness / 10) * 10;
-        const move = 200 - (progress * 200);
-        content.style.transform = `translateY(${move}vw)`;
-        content.style.filter = `brightness(${rounded}%)`;
-      } else {
-        content.style.transform = `translateY(0vw)`;
-        content.style.filter = `brightness(30%)`;
-      }
-    });
-
-    // texts
-    this.texts.forEach((text, i) => {
-      const startLeft = [-250, -200, -100];
-      const endRight = [100, 100, 120];
-
-      const startRight = [440, 400, 500];
-      const endLeft = [-100, -60, -70];
-
-      const totalScroll = e - s;
-      const progress = (scrollY - s) / totalScroll;
-
-      if (i <= 2) {
         if (scrollY <= s) {
-          text.style.transform = `translateX(${startLeft[i]}vw)`;
-        } else if (scrollY > s && scrollY < e) {
-          const currentX = startLeft[i] + (endRight[i] - startLeft[i]) * progress;
-          text.style.transform = `translateX(${currentX}vw)`;
+          transform = `translateX(${startX}vw) translateY(${startY}vh) scale(0.5)`;
+          opacity = '0.1';
+        } else if (scrollY < maxAnimRebon1) {
+          const progress = Math.min(Math.max((scrollY - s) / (step * 6), 0), 1);
+          const moveX = startX + (progress * (endX - startX));
+          const moveY = startY + (progress * (endY - startY));
+          transform = `translateX(${moveX}vw) translateY(${moveY}vh) scale(0.5)`;
+          opacity = '0.1';
+        } else if (scrollY <= e + window.innerHeight) {
+          transform = `translateX(${endX}vw) translateY(${endY}vh) scale(0.5)`;
+          const fadeProgress = 0.1 * (1 - (scrollY - e) / window.innerHeight);
+          opacity = fadeProgress.toFixed(2);
         } else {
-          text.style.transform = `translateX(${endRight[i]}vw)`;
+          opacity = '0';
         }
-      } else {
-        const index = i - 3;
-        if (scrollY <= s) {
-          text.style.transform = `translateX(${startRight[index]}vw)`;
-        } else if (scrollY > s && scrollY < e) {
-          const currentX = startRight[index] + (endLeft[index] - startRight[index]) * progress;
-          text.style.transform = `translateX(${currentX}vw)`;
-        } else {
-          text.style.transform = `translateX(${endLeft[index]}vw)`;
-        }
+
+        this.rebon1.style.transform = transform;
+        this.rebon1.style.opacity = opacity;
       }
-    });
 
-    // circle background
-    if (scrollY <= s) {
-      this.circle.style.transform = 'translateX(-50%) translateY(70vh)';
-      this.sticky.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0))';
-      this.h2El.style.opacity = '0';
-    } else if (scrollY > s && scrollY < e) {
-      const progress = (scrollY - s) / (e - s);
-      const move = 70 - (progress * 70);
-      const alpha = 0 + (progress * 0.9);
-      const roundedAlpha = alpha.toFixed(2);
+      // 리본 2
+      if (this.rebon2) {
+        let transform = '';
+        let opacity = '';
 
-      this.circle.style.transform = `translateX(-50%) translateY(${move}vh)`;
-      this.sticky.style.backgroundImage = `linear-gradient(rgba(0,0,0,${roundedAlpha}), rgba(0,0,0,${roundedAlpha}))`;
-      this.h2El.style.opacity = roundedAlpha;
-    } else {
-      this.circle.style.transform = 'translateX(-50%) translateY(0vh)';
-      this.sticky.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9))`;
-      this.h2El.style.opacity = '1';
+        const startX = this.isMobile ? 100 : 160;
+        const endX = this.isMobile ? 30 : 50;
+        const startY = this.isMobile ? 0 : 0;
+        const endY = this.isMobile ? 5 : 10;
+
+        if (scrollY <= s) {
+          transform = `translateX(${startX}vw) translateY(${startY}vh) scale(0.5)`;
+          opacity = '0.5';
+        } else if (scrollY < maxAnimRebon1) {
+          const progress = Math.min(Math.max((scrollY - s) / (step * 6), 0), 1);
+          const moveX = startX + (progress * (endX - startX));
+          const moveY = startY + (progress * (endY - startY));
+          transform = `translateX(${moveX}vw) translateY(${moveY}vh) scale(0.5)`;
+          opacity = '0.5';
+        } else if (scrollY <= e + window.innerHeight) {
+          transform = `translateX(${endX}vw) translateY(${endY}vh) scale(0.5)`;
+          const fadeProgress = 0.5 * (1 - (scrollY - e) / window.innerHeight);
+          opacity = fadeProgress.toFixed(2);
+        } else {
+          opacity = '0';
+        }
+
+        this.rebon2.style.transform = transform;
+        this.rebon2.style.opacity = opacity;
+      }
+
+      // 텍스트 애니메이션
+      if (this.text) {
+        let transform = '';
+        let opacity = '';
+
+        if (scrollY <= s) {
+          transform = `scale(1)`;
+          opacity = `0`;
+        } else if (scrollY < maxAnimRebon2) {
+          const progress = Math.min(Math.max((scrollY - s) / (step * 7), 0), 1);
+          const scaleValue = 1 + progress * 0.5;
+          transform = `scale(${scaleValue})`;
+          opacity = `${progress.toFixed(2)}`;
+        } else {
+          transform = `scale(1.5)`;
+          opacity = '1';
+        }
+
+        this.text.style.transform = transform;
+        this.text.style.opacity = opacity;
+      }
+    }
+
+    onScroll() {
+      if (!this.ticking) {
+        this.ticking = true;
+        window.requestAnimationFrame(() => {
+          this.animate();
+          this.ticking = false;
+        });
+      }
     }
   }
+
+  const main = document.querySelector("#page2");
+  const sticky = document.querySelector(".page2__inner");
+  const scroll = new Scroll(main, sticky);
+
+  document.addEventListener("DOMContentLoaded", () => scroll.init());
+  window.addEventListener("scroll", () => scroll.onScroll());
+
+  let resizeTimeout;
+  ['resize', 'orientationchange'].forEach(event => {
+    window.addEventListener(event, () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        setVhUnit(); // 뷰포트 단위 업데이트
+        scroll.init(); // 스크롤 위치 재계산
+      }, 300);
+    });
+  });
 }
 
+/* page4 scrollAnimation */
+{
+  class Page4Scroll {
+    constructor(main, sticky) {
+      this.main = main;
+      this.sticky = sticky;
+      this.h2El = sticky.querySelector("h2");
+      this.even = sticky.querySelectorAll(".even div");
+      this.odd = sticky.querySelectorAll(".odd div");
+      this.circle = sticky.querySelector(".circle_bg");
+      this.start = 0;
+      this.end = 0;
+      this.ticking = false;
 
-// page6 스크롤 애니메이션
-class Page6Scroll extends ScrollBase {
-  constructor(mainSelector, stickySelector) {
-    super(mainSelector, stickySelector);
-    this.images = this.sticky.querySelector('.page6__img');
-    this.h2El = this.sticky.querySelector('.page6__text');
-    this.liEl = this.images.querySelectorAll('ul li');
-  }
+      this.isMobile = window.innerWidth < 768;
+    }
 
-  init() {
-    const vh = window.innerHeight;
-    this.start = this.main.offsetTop - vh;
-    this.end = this.main.offsetTop + this.main.offsetHeight - vh;
-  }
+    init() {
+      const vh = window.innerHeight;
+      this.start = this.main.offsetTop - vh;
+      this.end = this.main.offsetTop + this.main.offsetHeight - vh * 1.5;
+    }
 
-  animate() {
-    const scrollY = window.scrollY;
-    const s = this.start;
-    const e = this.end;
+    animate() {
+      const scrollY = window.scrollY;
+      const s = this.start;
+      const e = this.end;
+      const progress = Math.min(Math.max((scrollY - s) / (e - s), 0), 1);
 
-    if (scrollY <= s) {
-      this.images.style.transform = 'translate3d(100vh, 0, 0)';
-      this.h2El.style.opacity = '0';
-      this.liEl.forEach(li => {
-        li.style.filter = 'opacity(1) grayscale(0)';
+      const evenMoveY = this.isMobile ? -100 + (progress * 100) : -200 + (progress * 200);
+      const oddMoveY = this.isMobile ? 100 - (progress * 100) : 200 - (progress * 200);
+      const brightness = Math.round((120 - progress * 90) / 10) * 10;
+
+      this.even.forEach((el) => {
+        el.style.transform = `translateY(calc(var(--vh) * ${evenMoveY}))`;
+        el.style.filter = `brightness(${brightness}%)`;
       });
-    } else if (scrollY > s && scrollY < e) {
-      const progress = (scrollY - s) / (e - s);
-      const move = 100 + (progress * -350);
+
+      this.odd.forEach((el) => {
+        el.style.transform = `translateY(calc(var(--vh) * ${oddMoveY}))`;
+        el.style.filter = `brightness(${brightness}%)`;
+      });
+
+      // 원형 배경 & 배경 색상 & h2 opacity
+      if (scrollY <= s) {
+        this.circle.style.transform = 'translateX(-50%) translateY(calc(var(--vh) * 70))';
+        this.sticky.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0))';
+        this.h2El.style.opacity = `0`;
+      } else if (scrollY > s && scrollY < e) {
+        const move = 70 - (progress * 70);
+        const alpha = (progress * 0.9).toFixed(2);
+        this.circle.style.transform = `translateX(-50%) translateY(calc(var(--vh) * ${move}))`;
+        this.sticky.style.backgroundImage = `linear-gradient(rgba(0,0,0,${alpha}), rgba(0,0,0,${alpha}))`;
+        this.h2El.style.opacity = alpha;
+      } else {
+        this.circle.style.transform = 'translateX(-50%) translateY(0)';
+        this.sticky.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9))`;
+        this.h2El.style.opacity = '1';
+      }
+    }
+
+    onScroll() {
+      if (!this.ticking) {
+        this.ticking = true;
+        requestAnimationFrame(() => {
+          this.animate();
+          this.ticking = false;
+        });
+      }
+    }
+  }
+
+  const main = document.querySelector("#page4");
+  const sticky = document.querySelector(".page4__inner");
+  const scroll = new Page4Scroll(main, sticky);
+
+  document.addEventListener("DOMContentLoaded", () => scroll.init());
+  window.addEventListener("scroll", () => scroll.onScroll());
+  let resizeTimeout;
+  ['resize', 'orientationchange'].forEach(event => {
+    window.addEventListener(event, () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        setVhUnit(); // <-- 반드시 호출
+        scroll.init(); // <-- 각 scroll 클래스의 init()
+      }, 300); // orientation 대응은 살짝 여유 있는 시간 추천
+    });
+  });
+
+}
+
+/* page6 scrollAnimation */
+{
+  class Page6Scroll {
+    constructor(main, sticky) {
+      this.main = main;
+      this.sticky = sticky;
+      this.images = sticky.querySelector('.page6__img');
+      this.h2El = sticky.querySelector('.page6__text');
+      this.liEl = this.images.querySelectorAll('ul li');
+      this.start = 0;
+      this.end = 0;
+      this.ticking = false;
+
+      this.isMobile = window.innerWidth < 768;
+    }
+
+    init() {
+      const vh = window.innerHeight;
+      this.start = this.main.offsetTop - vh;
+      this.end = this.main.offsetTop + this.main.offsetHeight - vh;
+    }
+
+    animate() {
+      const scrollY = window.scrollY;
+      const s = this.start;
+      const e = this.end;
+      const progress = Math.min(Math.max((scrollY - s) / (e - s), 0), 1);
+
+      const moveStart = this.isMobile ? 60 : 100;
+      const moveEnd = this.isMobile ? -150 : -250;
+      const move = moveStart + (progress * (moveEnd - moveStart));
+
       const opacity = 1 - progress * 0.7;
       const grayscale = progress * 0.8;
       const alpha = progress * 0.9;
 
-      this.images.style.transform = `translate3d(${move}vh, 0, 0)`;
-      this.h2El.style.opacity = alpha;
+      if (scrollY <= s) {
+        this.images.style.transform = `translate3d(calc(var(--vh) * ${moveStart}), 0, 0)`;
+        this.h2El.style.opacity = '0';
+        this.liEl.forEach(li => {
+          li.style.filter = 'opacity(1) grayscale(0)';
+        });
+      } else if (scrollY > s && scrollY < e) {
+        this.images.style.transform = `translate3d(calc(var(--vh) * ${move}), 0, 0)`;
+        this.h2El.style.opacity = alpha;
+        this.liEl.forEach(li => {
+          li.style.filter = `opacity(${opacity}) grayscale(${grayscale})`;
+        });
+      } else if (scrollY >= e) {
+        this.images.style.transform = `translate3d(calc(var(--vh) * ${moveEnd}), 0, 0)`;
+        this.h2El.style.opacity = '1';
+        this.liEl.forEach(li => {
+          li.style.filter = 'opacity(0.3) grayscale(0.8)';
+        });
+      }
+    }
 
-      this.liEl.forEach(li => {
-        li.style.filter = `opacity(${opacity}) grayscale(${grayscale})`;
-      });
-    } else {
-      this.images.style.transform = 'translate3d(-250vh, 0, 0)';
-      this.h2El.style.opacity = '1';
-      this.liEl.forEach(li => {
-        li.style.filter = 'opacity(0.3) grayscale(0.8)';
-      });
+    onScroll() {
+      if (!this.ticking) {
+        this.ticking = true;
+        window.requestAnimationFrame(() => {
+          this.animate();
+          this.ticking = false;
+        });
+      }
     }
   }
+
+  const main = document.querySelector("#page6");
+  const sticky = document.querySelector(".page6__inner");
+  const scroll = new Page6Scroll(main, sticky);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    scroll.init();
+  });
+
+  window.addEventListener("scroll", () => {
+    scroll.onScroll();
+  });
+
+
+  let resizeTimeout;
+  ['resize', 'orientationchange'].forEach(event => {
+    window.addEventListener(event, () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        setVhUnit(); // <-- 반드시 호출
+        scroll.init(); // <-- 각 scroll 클래스의 init()
+      }, 300); // orientation 대응은 살짝 여유 있는 시간 추천
+    });
+  });
+
 }
-
-
-// 인스턴스 생성 및 이벤트 등록
-
-const page2Scroll = new Page2Scroll("#page2", ".page2__inner");
-const page4Scroll = new Page4Scroll("#page4", ".page4__inner");
-const page6Scroll = new Page6Scroll("#page6", ".page6__inner");
-
-// 공통 이벤트 등록
-function onScroll() {
-  page2Scroll.onScroll();
-  page4Scroll.onScroll();
-  page6Scroll.onScroll();
-}
-function onResize() {
-  page2Scroll.onResize();
-  page4Scroll.onResize();
-  page6Scroll.onResize();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  page2Scroll.init();
-  page4Scroll.init();
-  page6Scroll.init();
-
-  page2Scroll.animate();
-  page4Scroll.animate();
-  page6Scroll.animate();
-});
-
-window.addEventListener("scroll", onScroll);
-window.addEventListener("resize", onResize);
 
 /* page3 skill tep */
 {
