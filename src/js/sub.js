@@ -86,7 +86,7 @@ const routes = {
     year:'2024년 7월',
     title:'02. The Vintage Wine Merchants',
     subtitle:'웹사이트 리뉴얼',
-    keywords:["#피그마","#애프터이펙트","프리미어","#비주얼스튜디오코드","#일반코딩","#모던","#고급","#심플","#전통"],
+    keywords:["#피그마","#애프터이펙트","#프리미어","#비주얼스튜디오코드","#React","#모던","#고급","#심플","#전통"],
     img:web2,
     maphref:"https://snstkfkadkfka.github.io/vintagewine-react/"
   },
